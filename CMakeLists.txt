@@ -7,12 +7,12 @@ find_package(Threads REQUIRED)
 
 configure_file(version.h.in ${CMAKE_CURRENT_SOURCE_DIR}/version.h)
 
-add_executable(helloworld_cli main.cpp)
+add_executable(helloworld main.cpp)
 add_executable(helloworld_test_cli test_main.cpp)
 
-add_library(helloworld lib.cpp)
+add_library(helloworld_lib lib.cpp)
 
-set_target_properties(helloworld helloworld_cli helloworld_test_cli PROPERTIES
+set_target_properties(helloworld_lib helloworld helloworld_test_cli PROPERTIES
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
@@ -23,10 +23,10 @@ set_target_properties(helloworld_test_cli PROPERTIES
   INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
 )
 
-target_link_libraries(helloworld_cli ${CMAKE_THREAD_LIBS_INIT} helloworld)
-target_link_libraries(helloworld_test_cli ${Boost_LIBRARIES} helloworld)
+target_link_libraries(helloworld ${CMAKE_THREAD_LIBS_INIT} helloworld_lib)
+target_link_libraries(helloworld_test_cli ${Boost_LIBRARIES} helloworld_lib)
 
-install(TARGETS helloworld_cli RUNTIME DESTINATION bin)
+install(TARGETS helloworld RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
