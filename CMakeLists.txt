@@ -15,7 +15,7 @@ add_library(helloworld_lib lib.cpp)
 set_target_properties(helloworld_lib helloworld helloworld_test_cli PROPERTIES
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
-  COMPILE_OPTIONS -Wpedantic -Wall -Wextra
+  COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
 )
 
 set_target_properties(helloworld_test_cli PROPERTIES
